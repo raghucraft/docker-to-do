@@ -1,40 +1,30 @@
-// Import the Express framework
+// Import Express
 const express = require("express");
 
-// Create an Express application
-// 'app' represents our web server
+// Import Mongoose
+const mongoose = require("mongoose");
+
+// Create Express application
 const app = express();
 
-// Define the port number on which the server will listen
+// Server port
 const PORT = 3000;
 
-// ==========================
-// ROUTES
-// ==========================
+// MongoDB connection string
+// "mongodb" is the service name from docker-compose.yml
+const MONGO_URI = "mongodb://mongodb:27017/tododb";
 
-// Handle GET requests to the root URL (/)
-//
-// When someone visits:
-// http://localhost:3000
-//
-// Express executes this function.
+// Connect to MongoDB
+mongoose.connect(MONGO_URI)
+    .then(() => console.log("✅ Connected to MongoDB"))
+    .catch((err) => console.log("❌ MongoDB Connection Error:", err));
+
+// Home route
 app.get("/", (req, res) => {
-
-    // req  -> Information sent by the client (browser)
-    // res  -> Used to send a response back to the client
-
-    // Send plain text back to the browser
     res.send("Hello, Docker!");
 });
 
-// ==========================
-// START SERVER
-// ==========================
-
-// Start the web server and listen for incoming requests
+// Start Express server
 app.listen(PORT, () => {
-
-    // This callback runs once the server has started successfully
-    console.log(`Server is running on port ${PORT}`);
-
+    console.log(`Server running on port ${PORT}`);
 });
