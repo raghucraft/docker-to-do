@@ -1,2 +1,29 @@
-# this is a docker compose file consisting build instruction for to do app
-# 
+# Docker Compose file for the Todo application
+
+services:
+
+  # Backend service
+  backend:
+    build: ./backend            # Build image using backend/Dockerfile
+    container_name: todo-backend
+
+    ports:
+      - "3000:3000"             # Host:Container
+
+    depends_on:
+      - mongodb                 # Start MongoDB before backend
+
+  # MongoDB service
+  mongodb:
+    image: mongo:8              # Official MongoDB image
+    container_name: todo-mongodb
+
+    ports:
+      - "27017:27017"           # Host:Container
+
+    volumes:
+      - mongodb-data:/data/db   # Persist database data
+
+# Named volumes
+volumes:
+  mongodb-data:                 # Docker-managed volume
