@@ -27,6 +27,16 @@ app.get("/", (req, res) => {
     res.send("Hello, Docker!");
 });
 
+// GET all todos
+app.get("/todos", async (req, res) => {
+
+    // Fetch all todos from MongoDB
+    const todos = await Todo.find();
+
+    // Return todos as JSON
+    res.json(todos);
+});
+
 // Start Express server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
