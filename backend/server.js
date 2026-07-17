@@ -10,6 +10,9 @@ const Todo = require("./models/Todo");
 // Create Express application
 const app = express();
 
+// Parse incoming JSON requests
+app.use(express.json());
+
 // Server port
 const PORT = 3000;
 
@@ -35,6 +38,16 @@ app.get("/todos", async (req, res) => {
 
     // Return todos as JSON
     res.json(todos);
+});
+
+// Create a new todo
+app.post("/todos", async (req, res) => {
+
+    // Save the received todo to MongoDB
+    const todo = await Todo.create(req.body);
+
+    // Return the created todo
+    res.json(todo);
 });
 
 // Start Express server
