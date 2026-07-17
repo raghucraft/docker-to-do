@@ -4,6 +4,9 @@ const express = require("express");
 // Import Mongoose
 const mongoose = require("mongoose");
 
+// Import Todo model
+const Todo = require("./models/Todo");
+
 // Create Express application
 const app = express();
 
