@@ -50,6 +50,20 @@ app.post("/todos", async (req, res) => {
     res.json(todo);
 });
 
+// Update an existing todo
+app.put("/todos/:id", async (req, res) => {
+
+    // Update the todo using its ID
+    const todo = await Todo.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+    );
+
+    // Return the updated todo
+    res.json(todo);
+});
+
 // Start Express server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
