@@ -64,6 +64,16 @@ app.put("/todos/:id", async (req, res) => {
     res.json(todo);
 });
 
+// Delete a todo
+app.delete("/todos/:id", async (req, res) => {
+
+    // Delete the todo using its ID
+    await Todo.findByIdAndDelete(req.params.id);
+
+    // Send success message
+    res.json({ message: "Todo deleted successfully" });
+});
+
 // Start Express server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
