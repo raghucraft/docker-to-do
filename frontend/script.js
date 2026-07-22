@@ -45,6 +45,21 @@ async function addTodo() {
 
     const title = todoInput.value;
 
-    console.log(title);
+    await fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            title: title,
+            completed: false
+        })
+
+    });
+
+    loadTodos();
 
 }
