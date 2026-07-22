@@ -7,14 +7,9 @@ const mongoose = require("mongoose");
 // Import Todo model
 const Todo = require("./models/Todo");
 
-const cors = require("cors");
 
 // Create Express application
 const app = express();
-
-// Import CORS middleware
-app.use(cors());
-
 
 // Parse incoming JSON requests
 app.use(express.json());
