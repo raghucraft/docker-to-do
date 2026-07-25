@@ -94,7 +94,18 @@ async function addTodo() {
 
     const todoInput = document.getElementById("todoInput");
 
-    const title = todoInput.value;
+    const title = todoInput.value.trim();
+
+    // Prevent empty or whitespace-only todos
+    if (title === "") {
+
+        // Show an error message to the user
+        alert("Todo cannot be empty.");
+
+        // Stop the function so no POST request is sent
+        return;
+
+    }
 
     await fetch(API_URL, {
 
