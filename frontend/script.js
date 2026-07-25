@@ -25,10 +25,38 @@ async function loadTodos() {
         // Display the todo title
         li.textContent = todo.title;
 
+        // Show completed todos with a line through them
+        li.style.textDecoration = todo.completed
+            ? "line-through"
+            : "none";
+
+        // Create Complete / Undo button
+        const completeBtn = document.createElement("button");
+        completeBtn.textContent = todo.completed ? "Undo" : "Complete";
+
+        completeBtn.addEventListener("click", async () => {
+
+            await fetch(`${API_URL}/${todo._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    completed: !todo.completed
+                })
+            });
+
+            // Reload the todo list
+            loadTodos();
+
+        });
+
+        // Add Complete button inside the <li>
+        li.appendChild(completeBtn);
+
         // Create Delete button
         const deleteBtn = document.createElement("button");
-
-        // Set button text
         deleteBtn.textContent = "Delete";
 
         // Delete todo when button is clicked
@@ -43,7 +71,7 @@ async function loadTodos() {
 
         });
 
-        // Add button inside the <li>
+        // Add Delete button inside the <li>
         li.appendChild(deleteBtn);
 
         // Add the <li> to the page
