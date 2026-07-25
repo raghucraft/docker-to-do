@@ -17,7 +17,6 @@ async function loadTodos() {
     // Remove old list items
     todoList.innerHTML = "";
 
-    // Loop through every todo
     todos.forEach(todo => {
 
         // Create a new list item (<li>)
@@ -26,19 +25,43 @@ async function loadTodos() {
         // Display the todo title
         li.textContent = todo.title;
 
-        // Add the list item to the page
-        todoList.appendChild(li);
-    });
+        // Create Delete button
+        const deleteBtn = document.createElement("button");
 
+        // Set button text
+        deleteBtn.textContent = "Delete";
+
+        // Delete todo when button is clicked
+        deleteBtn.addEventListener("click", async () => {
+
+            await fetch(`${API_URL}/${todo._id}`, {
+                method: "DELETE"
+            });
+
+            // Reload the todo list
+            loadTodos();
+
+        });
+
+        // Add button inside the <li>
+        li.appendChild(deleteBtn);
+
+        // Add the <li> to the page
+        todoList.appendChild(li);
+
+    });
 }
 
 // Load todos when the page opens
 loadTodos();
 
+// Find the Add button
 const addBtn = document.getElementById("addBtn");
 
+// Run addTodo() when button is clicked
 addBtn.addEventListener("click", addTodo);
 
+// Add a new todo
 async function addTodo() {
 
     const todoInput = document.getElementById("todoInput");
@@ -60,6 +83,10 @@ async function addTodo() {
 
     });
 
+    // Clear the input box
+    todoInput.value = "";
+
+    // Reload the todo list
     loadTodos();
 
 }
