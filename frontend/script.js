@@ -89,10 +89,26 @@ const addBtn = document.getElementById("addBtn");
 // Run addTodo() when button is clicked
 addBtn.addEventListener("click", addTodo);
 
+const todoInput = document.getElementById("todoInput");
+
+todoInput.addEventListener("keydown", function (event) {
+
+    // Check if the Enter key was pressed
+    if (event.key === "Enter") {
+
+        // Prevent the browser's default action
+        event.preventDefault();
+
+        // Add the todo
+        addTodo();
+
+    }
+
+});
+
 // Add a new todo
 async function addTodo() {
 
-    const todoInput = document.getElementById("todoInput");
 
     const title = todoInput.value.trim();
 
