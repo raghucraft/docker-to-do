@@ -22,13 +22,17 @@ async function loadTodos() {
         // Create a new list item (<li>)
         const li = document.createElement("li");
 
-        // Display the todo title
-        li.textContent = todo.title;
+        // Create a span to hold the todo text
+        const todoText = document.createElement("span");
+        todoText.textContent = todo.title;
 
         // Show completed todos with a line through them
-        li.style.textDecoration = todo.completed
+        todoText.style.textDecoration = todo.completed
             ? "line-through"
             : "none";
+
+        // Add the todo text to the list item
+        li.appendChild(todoText);
 
         // Create Complete / Undo button
         const completeBtn = document.createElement("button");
@@ -37,7 +41,9 @@ async function loadTodos() {
         completeBtn.addEventListener("click", async () => {
 
             await fetch(`${API_URL}/${todo._id}`, {
+
                 method: "PUT",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -45,6 +51,7 @@ async function loadTodos() {
                 body: JSON.stringify({
                     completed: !todo.completed
                 })
+
             });
 
             // Reload the todo list
@@ -59,11 +66,12 @@ async function loadTodos() {
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
 
-        // Delete todo when button is clicked
         deleteBtn.addEventListener("click", async () => {
 
             await fetch(`${API_URL}/${todo._id}`, {
+
                 method: "DELETE"
+
             });
 
             // Reload the todo list
@@ -78,6 +86,7 @@ async function loadTodos() {
         todoList.appendChild(li);
 
     });
+
 }
 
 // Load todos when the page opens
@@ -86,11 +95,13 @@ loadTodos();
 // Find the Add button
 const addBtn = document.getElementById("addBtn");
 
+// Find the input box
+const todoInput = document.getElementById("todoInput");
+
 // Run addTodo() when button is clicked
 addBtn.addEventListener("click", addTodo);
 
-const todoInput = document.getElementById("todoInput");
-
+// Run addTodo() when Enter is pressed
 todoInput.addEventListener("keydown", function (event) {
 
     // Check if the Enter key was pressed
@@ -108,7 +119,6 @@ todoInput.addEventListener("keydown", function (event) {
 
 // Add a new todo
 async function addTodo() {
-
 
     const title = todoInput.value.trim();
 
@@ -132,8 +142,10 @@ async function addTodo() {
         },
 
         body: JSON.stringify({
+
             title: title,
             completed: false
+
         })
 
     });
