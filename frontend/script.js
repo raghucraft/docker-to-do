@@ -34,9 +34,15 @@ async function loadTodos() {
         // Add the todo text to the list item
         li.appendChild(todoText);
 
+        // Create button container
+        const buttonGroup = document.createElement("div");
+        buttonGroup.className = "button-group";
+
         // Create Complete / Undo button
         const completeBtn = document.createElement("button");
-        completeBtn.textContent = todo.completed ? "Undo" : "Complete";
+        completeBtn.textContent = todo.completed
+            ? "Undo"
+            : "Complete";
 
         completeBtn.addEventListener("click", async () => {
 
@@ -59,9 +65,6 @@ async function loadTodos() {
 
         });
 
-        // Add Complete button inside the <li>
-        li.appendChild(completeBtn);
-
         // Create Delete button
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
@@ -79,8 +82,12 @@ async function loadTodos() {
 
         });
 
-        // Add Delete button inside the <li>
-        li.appendChild(deleteBtn);
+        // Add buttons to the button container
+        buttonGroup.appendChild(completeBtn);
+        buttonGroup.appendChild(deleteBtn);
+
+        // Add button container to the todo item
+        li.appendChild(buttonGroup);
 
         // Add the <li> to the page
         todoList.appendChild(li);
