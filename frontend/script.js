@@ -20,7 +20,7 @@ async function loadTodos() {
     // Show a message if there are no todos
     if (todos.length === 0) {
 
-        todoList.innerHTML = "<li>No todos yet.</li>";
+        todoList.innerHTML = '<li class="empty-message">No todos yet.</li>';
 
         return;
 
