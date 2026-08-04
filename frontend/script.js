@@ -44,6 +44,9 @@ async function loadTodos() {
             ? "Undo"
             : "Complete";
 
+        // Apply CSS class
+        completeBtn.className = "complete-btn";
+
         completeBtn.addEventListener("click", async () => {
 
             await fetch(`${API_URL}/${todo._id}`, {
@@ -68,6 +71,9 @@ async function loadTodos() {
         // Create Delete button
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
+
+        // Apply CSS class
+        deleteBtn.className = "delete-btn"; 
 
         deleteBtn.addEventListener("click", async () => {
 
