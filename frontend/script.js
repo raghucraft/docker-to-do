@@ -17,6 +17,15 @@ async function loadTodos() {
     // Remove old list items
     todoList.innerHTML = "";
 
+    // Show a message if there are no todos
+    if (todos.length === 0) {
+
+        todoList.innerHTML = "<li>No todos yet.</li>";
+
+        return;
+
+    }
+
     todos.forEach(todo => {
 
         // Create a new list item (<li>)
@@ -77,6 +86,15 @@ async function loadTodos() {
 
         deleteBtn.addEventListener("click", async () => {
 
+            // Ask the user before deleting
+            const confirmed = confirm("Are you sure you want to delete this todo?");
+
+            // Stop if the user clicks Cancel
+            if (!confirmed) {
+                return;
+            }
+
+            // Delete the todo using its ID
             await fetch(`${API_URL}/${todo._id}`, {
 
                 method: "DELETE"
