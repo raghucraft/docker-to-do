@@ -35,10 +35,10 @@ async function loadTodos() {
         const todoText = document.createElement("span");
         todoText.textContent = todo.title;
 
-        // Show completed todos with a line through them
-        todoText.style.textDecoration = todo.completed
-            ? "line-through"
-            : "none";
+        // Add to css completed class if the todo is completed
+        if (todo.completed) {
+            todoText.classList.add("completed");
+        }
 
         // Add the todo text to the list item
         li.appendChild(todoText);

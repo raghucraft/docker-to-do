@@ -114,6 +114,7 @@ li {
 /* Lift card on hover */
 li:hover {
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Todo text */
@@ -135,3 +136,10 @@ li:only-child {
     color: #777;
     font-style: italic;
 }
+
+/* Completed todo */
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
