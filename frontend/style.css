@@ -131,7 +131,7 @@ li span {
 }
 
 /* Empty todo list message */
-li:only-child {
+.empty-message {
     text-align: center;
     color: #777;
     font-style: italic;
